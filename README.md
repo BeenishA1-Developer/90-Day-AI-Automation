@@ -12,3 +12,5 @@
 | 4 | Number Guessing Game | ✅ |
 | 5 | Calculator with Functions | ✅ |
 | 6 | Student Management System | ✅ |
+| 7 | README + Week 1 Revision | ✅ |
+| 8 | Notes App - File Handling | ✅ |
