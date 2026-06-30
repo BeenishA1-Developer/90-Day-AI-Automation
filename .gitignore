@@ -1,3 +1,4 @@
 echo "*.json" >> .gitignore
 echo "*.txt" >> .gitignore
 echo "TASK.py" >> .gitignore
+.env
