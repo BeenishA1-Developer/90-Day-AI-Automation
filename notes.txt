@@ -1,6 +1,0 @@
-echo "*.txt" >> .gitignore
-echo "*.json" >> .gitignore
-git rm --cached notes.txt
-git add .gitignore
-git commit -m "Day 14: Add .gitignore, remove tracked data files"
-git push
