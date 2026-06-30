@@ -9,6 +9,5 @@ def get_weather(city):
     except Exception as e:
         print(f"Error: {e}")
 
-# Ab code har dafa chalne par tumse poochay ga!
 user_city = input("Enter city name for weather update: ")
 get_weather(user_city)
