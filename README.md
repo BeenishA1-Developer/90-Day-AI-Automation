@@ -21,6 +21,7 @@
 | **Day 17** | PUT, DELETE Requests & Nested JSON Parsing | ✅ |
 | **Day 18** | First OpenAI API Integration | ✅ |
 | **Day 19** | Combining Multiple APIs - Daily Digest | ✅ |
+| **Day 20** | OpenAI + Public API Combined | ✅ |
 
 ---
 
@@ -35,7 +36,6 @@
 
 ### 📝 Day 17: PUT, DELETE Requests & Nested JSON Parsing
 * **Concept:** Successfully implemented HTTP PUT and DELETE requests using jsonplaceholder API via `requests.put()` and `requests.delete()`.
-* **Honest Note:** Tested `restcountries.com` (v3.1 variants and v2) thoroughly, but the API endpoints are officially deprecated/retired by the provider. 
 * **Data Parsing:** Practiced nested JSON parsing using clean static dictionary structures inside `nested_json_practice()` to safely extract multi-level data without crashing the program.
 
 ### 📝 Day 18: OpenAI API Integration
@@ -46,4 +46,7 @@
 ### 📝 Day 19: Combining Multiple APIs (Daily Digest)
 * **Concept:** Developed a workflow that combines data from two independent public API endpoints (`adviceslip` and `official-joke-api`).
 * **Data Flow:** Handled JSON data extraction and streamlined multiple asynchronous network responses into a unified console interface.
-| **Day 20** | OpenAI + Public API Combined | ✅ |
+
+### 📝 Day 20: OpenAI + Public API Combined
+* **Concept:** Connected a third-party data endpoint directly to an LLM provider to process live inputs dynamically.
+* **Data Pipeline:** Extracted text from a public endpoint and passed it contextually into a secure AI client to generate optimized developer insights.
