@@ -24,6 +24,7 @@
 | **Day 20** | OpenAI + Public API Combined | ✅ |
 | **Day 21** | Nested JSON Deep Parsing Practice | ✅ |
 | **Day 22** | FastAPI Basics (root + dynamic routes) | ✅ |
+| **Day 23** | FastAPI: Query Parameters & Request Body (Pydantic) | ✅ |
 
 ---
 
@@ -60,6 +61,10 @@
 ### 📝 Day 22: FastAPI Basics
 * **Concept:** Created the first live web backend environment using FastAPI and production Uvicorn runners.
 * **Routing:** Successfully deployed a clean root handler (`/`) alongside dynamic URL path parameters (`/greet/{name}`) verified via Swagger UI (`/docs`).
+
+### 📝 Day 23: FastAPI: Query Parameters & Request Body
+* **Concept:** Explored advanced routing mechanics by handling dynamic query strings and schema-structured JSON payloads.
+* **Data Validation:** Utilized Pydantic's `BaseModel` to strictly validate incoming request body objects (`/products`), alongside managing custom default states inside dynamic queries (`/search`).
 
 ---
 
