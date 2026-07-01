@@ -22,6 +22,8 @@
 | **Day 18** | First OpenAI API Integration | ✅ |
 | **Day 19** | Combining Multiple APIs - Daily Digest | ✅ |
 | **Day 20** | OpenAI + Public API Combined | ✅ |
+| **Day 21** | Nested JSON Deep Parsing Practice | ✅ |
+| **Day 22** | FastAPI Basics (root + dynamic routes) | ✅ |
 
 ---
 
@@ -50,6 +52,15 @@
 ### 📝 Day 20: OpenAI + Public API Combined
 * **Concept:** Connected a third-party data endpoint directly to an LLM provider to process live inputs dynamically.
 * **Data Pipeline:** Extracted text from a public endpoint and passed it contextually into a secure AI client to generate optimized developer insights.
+
+### 📝 Day 21: Nested JSON Deep Parsing Practice
+* **Concept:** Mastered multi-level nested dictionary handling and object schema extraction.
+* **Safe Navigation:** Implemented `.get()` nesting chains with custom defaults to guarantee crash-free fallback management in data tracking.
+
+### 📝 Day 22: FastAPI Basics
+* **Concept:** Created the first live web backend environment using FastAPI and production Uvicorn runners.
+* **Routing:** Successfully deployed a clean root handler (`/`) alongside dynamic URL path parameters (`/greet/{name}`) verified via Swagger UI (`/docs`).
+
 ---
 
 ## 📊 Week 3 Summary & Reflections
