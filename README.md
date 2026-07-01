@@ -19,6 +19,8 @@
 | **Day 15** | Public API Integration (Random Joke Fetcher) | ✅ |
 | **Day 16** | Advanced JSON Filtering & Data Validation | ✅ |
 | **Day 17** | PUT, DELETE Requests & Nested JSON Parsing | ✅ |
+| **Day 18** | First OpenAI API Integration | ✅ |
+| **Day 19** | Combining Multiple APIs - Daily Digest | ✅ |
 
 ---
 
@@ -35,13 +37,12 @@
 * **Concept:** Successfully implemented HTTP PUT and DELETE requests using jsonplaceholder API via `requests.put()` and `requests.delete()`.
 * **Honest Note:** Tested `restcountries.com` (v3.1 variants and v2) thoroughly, but the API endpoints are officially deprecated/retired by the provider. 
 * **Data Parsing:** Practiced nested JSON parsing using clean static dictionary structures inside `nested_json_practice()` to safely extract multi-level data without crashing the program.
-### Day 18: OpenAI API Integration
-- Integrated OpenRouter API using the standard OpenAI Python client library.
-- Managed API keys securely using a `.env` file and handled environment variables with `python-dotenv`.
-- Configured `.gitignore` to prevent sensitive API credentials from being pushed to a public repository.
 
-### Day 19: Combining Multiple APIs (Daily Digest)
-- Developed a workflow that combines data from two independent public API endpoints (`adviceslip` and `official-joke-api`).
-- Handled JSON data extraction and streamlined multiple asynchronous network responses into a unified console interface.
-| Day 18 | First OpenAI API Integration | ✅ |
-| Day 19 | Combining Multiple APIs - Daily Digest | ✅ |
+### 📝 Day 18: OpenAI API Integration
+* **Concept:** Integrated OpenRouter API using the standard OpenAI Python client library.
+* **Security:** Managed API keys securely using a `.env` file and handled environment variables with `python-dotenv`.
+* **Git Safety:** Configured `.gitignore` to prevent sensitive API credentials from being tracked.
+
+### 📝 Day 19: Combining Multiple APIs (Daily Digest)
+* **Concept:** Developed a workflow that combines data from two independent public API endpoints (`adviceslip` and `official-joke-api`).
+* **Data Flow:** Handled JSON data extraction and streamlined multiple asynchronous network responses into a unified console interface.
