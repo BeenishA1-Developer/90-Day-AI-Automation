@@ -50,3 +50,7 @@
 ### 📝 Day 20: OpenAI + Public API Combined
 * **Concept:** Connected a third-party data endpoint directly to an LLM provider to process live inputs dynamically.
 * **Data Pipeline:** Extracted text from a public endpoint and passed it contextually into a secure AI client to generate optimized developer insights.
+---
+
+## 📊 Week 3 Summary & Reflections
+This week focused heavily on real-world HTTP networking and AI orchestration. I mastered handling standard HTTP methods (`GET`, `POST`, `PUT`, `DELETE`) and successfully automated workflows using the `requests` library. A critical industry lesson learned was handling API deprecation, as experienced with the retired `restcountries.com` endpoint, which taught me the value of fallback logic and adaptive data structural parsing. Finally, I successfully bridged third-party data pipelines with the OpenAI standard client using OpenRouter, learning how to pass live external inputs directly to an LLM securely using environment variables (`.env`).
