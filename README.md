@@ -43,3 +43,5 @@
 ### Day 19: Combining Multiple APIs (Daily Digest)
 - Developed a workflow that combines data from two independent public API endpoints (`adviceslip` and `official-joke-api`).
 - Handled JSON data extraction and streamlined multiple asynchronous network responses into a unified console interface.
+| Day 18 | First OpenAI API Integration | ✅ |
+| Day 19 | Combining Multiple APIs - Daily Digest | ✅ |
