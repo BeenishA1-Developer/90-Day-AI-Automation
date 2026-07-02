@@ -27,7 +27,7 @@
 | **Day 23** | FastAPI: Query Parameters & Request Body (Pydantic) | ✅ |
 | **Day 24** | FastAPI: Error Handling (`HTTPException`) & Virtual Environment Setup | ✅ |
 | **Day 25** | FastAPI: Path Operations Order & Multi-Route Resolution | ✅ |
-
+| **Day 26** | FastAPI: Path Parameter Type Validation | ✅ |
 ---
 
 ### 📝 Day 15: Public API Integration
@@ -75,3 +75,7 @@
 ### 📝 Day 25: FastAPI Path Operations Order & Multi-Route Resolution
 * **Concept:** Explored FastAPI's top-down matching mechanism for URL path layouts.
 * **Path Ordering:** Discovered that placing dynamic routes (`/products/{product_id}`) above static routes (`/products/featured`) captures static keywords incorrectly as variables, creating a tracking mismatch. Resolved this routing bug successfully by prioritizing exact static endpoints at the top of the execution block.
+### 📝 Day 26: FastAPI: Path Parameter Type Validation
+* **Concept:** Explored FastAPI's automatic data validation using standard Python type hinting (`item_id: int`).
+* **Type Validation:** Verified that sending a valid integer (`/items/5`) executes correctly, while sending an invalid type like text (`/items/abc`) triggers an automatic `422 Unprocessable Entity` response.
+* **Mechanism:** Learnt that FastAPI leverages Pydantic internally to parse and validate incoming data before it even hits the core path function, removing the need for manual validation checks.
