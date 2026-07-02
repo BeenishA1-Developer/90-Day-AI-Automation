@@ -25,6 +25,7 @@
 | **Day 21** | Nested JSON Deep Parsing Practice | ✅ |
 | **Day 22** | FastAPI Basics (root + dynamic routes) | ✅ |
 | **Day 23** | FastAPI: Query Parameters & Request Body (Pydantic) | ✅ |
+| **Day 24** | FastAPI: Error Handling (`HTTPException`) & Virtual Environment Setup | ✅ |
 
 ---
 
@@ -66,7 +67,6 @@
 * **Concept:** Explored advanced routing mechanics by handling dynamic query strings and schema-structured JSON payloads.
 * **Data Validation:** Utilized Pydantic's `BaseModel` to strictly validate incoming request body objects (`/products`), alongside managing custom default states inside dynamic queries (`/search`).
 
----
-
-## 📊 Week 3 Summary & Reflections
-This week focused heavily on real-world HTTP networking and AI orchestration. I mastered handling standard HTTP methods (`GET`, `POST`, `PUT`, `DELETE`) and successfully automated workflows using the `requests` library. A critical industry lesson learned was handling API deprecation, as experienced with the retired `restcountries.com` endpoint, which taught me the value of fallback logic and adaptive data structural parsing. Finally, I successfully bridged third-party data pipelines with the OpenAI standard client using OpenRouter, learning how to pass live external inputs directly to an LLM securely using environment variables (`.env`).
+### 📝 Day 24: FastAPI Error Handling & Virtual Environment
+* **Concept:** Configured an isolated python framework scope using `venv` to prevent interpreter path confusion permanently.
+* **Error Handling:** Mastered industrial API standard error dispatching by raising proper `HTTPException(status_code=404)` handlers to securely catch missing records during route lookups.
