@@ -26,6 +26,7 @@
 | **Day 22** | FastAPI Basics (root + dynamic routes) | ✅ |
 | **Day 23** | FastAPI: Query Parameters & Request Body (Pydantic) | ✅ |
 | **Day 24** | FastAPI: Error Handling (`HTTPException`) & Virtual Environment Setup | ✅ |
+| **Day 25** | FastAPI: Path Operations Order & Multi-Route Resolution | ✅ |
 
 ---
 
@@ -70,3 +71,7 @@
 ### 📝 Day 24: FastAPI Error Handling & Virtual Environment
 * **Concept:** Configured an isolated python framework scope using `venv` to prevent interpreter path confusion permanently.
 * **Error Handling:** Mastered industrial API standard error dispatching by raising proper `HTTPException(status_code=404)` handlers to securely catch missing records during route lookups.
+
+### 📝 Day 25: FastAPI Path Operations Order & Multi-Route Resolution
+* **Concept:** Explored FastAPI's top-down matching mechanism for URL path layouts.
+* **Path Ordering:** Discovered that placing dynamic routes (`/products/{product_id}`) above static routes (`/products/featured`) captures static keywords incorrectly as variables, creating a tracking mismatch. Resolved this routing bug successfully by prioritizing exact static endpoints at the top of the execution block.
