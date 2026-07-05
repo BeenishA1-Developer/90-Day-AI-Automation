@@ -28,6 +28,7 @@
 | **Day 24** | FastAPI: Error Handling (`HTTPException`) & Virtual Environment Setup | ✅ |
 | **Day 25** | FastAPI: Path Operations Order & Multi-Route Resolution | ✅ |
 | **Day 26** | FastAPI: Path Parameter Type Validation | ✅ |
+| **Day 27** | Mini Inventory API (Week 4 Wrap-Up) | ✅ |
 ---
 
 ### 📝 Day 15: Public API Integration
@@ -79,3 +80,7 @@
 * **Concept:** Explored FastAPI's automatic data validation using standard Python type hinting (`item_id: int`).
 * **Type Validation:** Verified that sending a valid integer (`/items/5`) executes correctly, while sending an invalid type like text (`/items/abc`) triggers an automatic `422 Unprocessable Entity` response.
 * **Mechanism:** Learnt that FastAPI leverages Pydantic internally to parse and validate incoming data before it even hits the core path function, removing the need for manual validation checks.
+### 📝 Day 27: Mini Inventory API (Week 4 Wrap-Up)
+* **Concept:** Consolidated all core FastAPI mechanics acquired throughout the week into a unified operational microservice backend layout.
+* **Implementation:** Built four critical interface pipelines containing conditional loops to resolve dynamic datasets, complete with Pydantic request structure engines.
+* **Error Handling:** Formulated a structural layout that intercepts target exceptions natively to correctly dispatch standard `HTTPException(status_code=404)` warnings immediately if incoming identity lookups fail validation checks.
