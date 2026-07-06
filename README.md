@@ -29,6 +29,7 @@
 | **Day 25** | FastAPI: Path Operations Order & Multi-Route Resolution | ✅ |
 | **Day 26** | FastAPI: Path Parameter Type Validation | ✅ |
 | **Day 27** | Mini Inventory API (Week 4 Wrap-Up) | ✅ |
+| **Day 28** | Deploy FastAPI to Vercel | ✅ |
 ---
 
 ### 📝 Day 15: Public API Integration
@@ -87,3 +88,7 @@ This week, I transitioned into backend development using FastAPI. I learned the 
 * **Concept:** Combined all backend concepts from Week 4 into one single functional inventory microservice file.
 * **Implementation:** Built four paths: getting all items, fetching a single item by its numeric identity, adding a new item, and checking structure validity.
 * **Error Handling:** Used a standard loop logic that automatically triggers an explicit `HTTPException(status_code=404)` message immediately if a user requests a product ID that does not exist inside our system data array.
+## 📝 Day 28: Deploy FastAPI to Vercel
+* **Concept:** Learned how to deploy a local FastAPI project to the live internet for a portfolio.
+* **Implementation:** Created a simple `vercel.json` configuration file, connected the GitHub repository to Vercel, and successfully deployed the backend for free.
+* **Live API Link:** [https://90-day-ai-automation.vercel.app/docs](https://90-day-ai-automation.vercel.app/docs)
