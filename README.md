@@ -30,6 +30,7 @@
 | **Day 26** | FastAPI: Path Parameter Type Validation | ✅ |
 | **Day 27** | Mini Inventory API (Week 4 Wrap-Up) | ✅ |
 | **Day 28** | Deploy FastAPI to Vercel | ✅ |
+| **Day 29** | Connect FastAPI to n8n | ✅ |
 ---
 
 ### 📝 Day 15: Public API Integration
@@ -92,3 +93,7 @@ This week, I transitioned into backend development using FastAPI. I learned the 
 * **Concept:** Learned how to deploy a local FastAPI project to the live internet for a portfolio.
 * **Implementation:** Created a simple `vercel.json` configuration file, connected the GitHub repository to Vercel, and successfully deployed the backend for free.
 * **Live API Link:** [https://90-day-ai-automation.vercel.app/docs](https://90-day-ai-automation.vercel.app/docs)
+### 📝 Day 29: Connect FastAPI to n8n Workflow
+* **Concept:** Transitioned to Month 2 automation concepts by linking custom backend infrastructure directly to an enterprise automation platform.
+* **Implementation:** Configured a manual execution sequence inside n8n, mapped an HTTP Request node using the `GET` method to point directly to the live Vercel inventory endpoint, and verified data parsing.
+* **Result:** Successfully fetched the live inventory dictionary structure (`Laptop`, `Mouse`, `Keyboard`) directly into the n8n node canvas output panel.
