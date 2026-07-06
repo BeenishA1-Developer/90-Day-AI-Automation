@@ -1,0 +1,14 @@
+{
+  "builds": [
+    {
+      "src": "day27.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "day27.py"
+    }
+  ]
+}
