@@ -33,6 +33,7 @@
 | **Day 29** | Connect FastAPI to n8n | ✅ |
 | **Day 30** | Google Sheets Integration & Data Upsert Logic | ✅ |
 | **Day 31** | Live API Automation with Webhook Trigger | ✅ |
+| **Day 32** | Production Webhook & Error Handling (n8n) | ✅ |
 
 ---
 
@@ -114,3 +115,8 @@ This week, I transitioned into backend development using FastAPI. I learned the 
 * **Concept:** Converted the manual testing layout into a completely hands-free, event-driven production pipeline.
 * **Implementation:** Swapped manual node executors with a native **Webhook Trigger** (GET method) capable of running background jobs autonomously via incoming network hits.
 * **Data Processing:** Implemented a **Split Out** node autonomously between the HTTP caller and the database writer. Because incoming API payloads stream down inside a packed singular array, splitting out the main data key breaks down the object structure into clean individual items. This optimization handles iterative workflows flawlessly, sending unique item payloads directly to Google Sheets rows automatically.
+
+### 📝 Day 32: Production Webhook & Error Handling (n8n)
+* **Concept:** Transitioned from development mode to fully operational production infrastructure by understanding the critical difference between Test URLs and Production URLs. Learnt that production webhooks run 24/7 as a background daemon without needing the n8n editor active.
+* **Production Deployment:** Successfully flipped the workflow execution state to **Active/Published**. Captured the dynamic production web gateway routing (`/webhook/` injection format) and verified remote triggering with the editor panel closed.
+* **Error Infrastructure (Fail-Safe):** Architected a dedicated downstream global **Error Trigger Workflow** named `Error_Workflow`. Configured the core workflow properties to automatically reroute network timeouts, API drops, or execution faults into this error handler to log diagnostic data safely inside Google Sheets, eliminating silent crashes.
