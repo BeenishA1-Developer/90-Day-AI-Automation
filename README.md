@@ -31,6 +31,9 @@
 | **Day 27** | Mini Inventory API (Week 4 Wrap-Up) | ✅ |
 | **Day 28** | Deploy FastAPI to Vercel | ✅ |
 | **Day 29** | Connect FastAPI to n8n | ✅ |
+| **Day 30** | Google Sheets Integration & Data Upsert Logic | ✅ |
+| **Day 31** | Live API Automation with Webhook Trigger | ✅ |
+
 ---
 
 ### 📝 Day 15: Public API Integration
@@ -78,10 +81,12 @@
 ### 📝 Day 25: FastAPI Path Operations Order & Multi-Route Resolution
 * **Concept:** Explored FastAPI's top-down matching mechanism for URL path layouts.
 * **Path Ordering:** Discovered that placing dynamic routes (`/products/{product_id}`) above static routes (`/products/featured`) captures static keywords incorrectly as variables, creating a tracking mismatch. Resolved this routing bug successfully by prioritizing exact static endpoints at the top of the execution block.
+
 ### 📝 Day 26: FastAPI: Path Parameter Type Validation
 * **Concept:** Explored FastAPI's automatic data validation using standard Python type hinting (`item_id: int`).
 * **Type Validation:** Verified that sending a valid integer (`/items/5`) executes correctly, while sending an invalid type like text (`/items/abc`) triggers an automatic `422 Unprocessable Entity` response.
 * **Mechanism:** Learnt that FastAPI leverages Pydantic internally to parse and validate incoming data before it even hits the core path function, removing the need for manual validation checks.
+
 ### 📝 Week 4 Summary & Core Framework Wrap-Up
 This week, I transitioned into backend development using FastAPI. I learned the basics of routing, handling parameters, and managing incoming request data securely. I practiced structural rules like endpoint ordering to avoid bugs, implemented data validation using Pydantic, and created proper custom error handling using status codes. Everything was brought together into a fully functional Mini Inventory system.
 
@@ -89,11 +94,23 @@ This week, I transitioned into backend development using FastAPI. I learned the 
 * **Concept:** Combined all backend concepts from Week 4 into one single functional inventory microservice file.
 * **Implementation:** Built four paths: getting all items, fetching a single item by its numeric identity, adding a new item, and checking structure validity.
 * **Error Handling:** Used a standard loop logic that automatically triggers an explicit `HTTPException(status_code=404)` message immediately if a user requests a product ID that does not exist inside our system data array.
+
 ## 📝 Day 28: Deploy FastAPI to Vercel
 * **Concept:** Learned how to deploy a local FastAPI project to the live internet for a portfolio.
 * **Implementation:** Created a simple `vercel.json` configuration file, connected the GitHub repository to Vercel, and successfully deployed the backend for free.
 * **Live API Link:** [https://90-day-ai-automation.vercel.app/docs](https://90-day-ai-automation.vercel.app/docs)
+
 ### 📝 Day 29: Connect FastAPI to n8n Workflow
 * **Concept:** Transitioned to Month 2 automation concepts by linking custom backend infrastructure directly to an enterprise automation platform.
 * **Implementation:** Configured a manual execution sequence inside n8n, mapped an HTTP Request node using the `GET` method to point directly to the live Vercel inventory endpoint, and verified data parsing.
 * **Result:** Successfully fetched the live inventory dictionary structure (`Laptop`, `Mouse`, `Keyboard`) directly into the n8n node canvas output panel.
+
+### 📝 Day 30: Google Sheets Integration & Data Upsert Logic
+* **Concept:** Modeled database synchronization workflows by streaming external API responses into spreadsheets.
+* **Implementation:** Connected Google Sheets OAuth2 credentials into n8n and utilized the **Append or Update Row** operation. 
+* **Data Structuring:** Configured exact data key mapping (`id`, `name`, `price`, `stock`) and set `Id` as the unique matching key constraint. This structural logic creates an industrial upsert mechanism, preventing row duplication by cleanly updating existing stocks if the items run again.
+
+### 📝 Day 31: Live API Automation with Webhook Trigger
+* **Concept:** Converted the manual testing layout into a completely hands-free, event-driven production pipeline.
+* **Implementation:** Swapped manual node executors with a native **Webhook Trigger** (GET method) capable of running background jobs autonomously via incoming network hits.
+* **Data Processing:** Implemented a **Split Out** node autonomously between the HTTP caller and the database writer. Because incoming API payloads stream down inside a packed singular array, splitting out the main data key breaks down the object structure into clean individual items. This optimization handles iterative workflows flawlessly, sending unique item payloads directly to Google Sheets rows automatically.
