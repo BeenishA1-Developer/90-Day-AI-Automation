@@ -34,6 +34,7 @@
 | **Day 30** | Google Sheets Integration & Data Upsert Logic | ✅ |
 | **Day 31** | Live API Automation with Webhook Trigger | ✅ |
 | **Day 32** | Production Webhook & Error Handling (n8n) | ✅ |
+| **Day 33** | Email Notification Automation (n8n) | ✅ |
 
 ---
 
@@ -120,3 +121,8 @@ This week, I transitioned into backend development using FastAPI. I learned the 
 * **Concept:** Transitioned from development mode to fully operational production infrastructure by understanding the critical difference between Test URLs and Production URLs. Learnt that production webhooks run 24/7 as a background daemon without needing the n8n editor active.
 * **Production Deployment:** Successfully flipped the workflow execution state to **Active/Published**. Captured the dynamic production web gateway routing (`/webhook/` injection format) and verified remote triggering with the editor panel closed.
 * **Error Infrastructure (Fail-Safe):** Architected a dedicated downstream global **Error Trigger Workflow** named `Error_Workflow`. Configured the core workflow properties to automatically reroute network timeouts, API drops, or execution faults into this error handler to log diagnostic data safely inside Google Sheets, eliminating silent crashes.
+
+### 📝 Day 33: Email Notification Automation & Conditional Logic (n8n)
+* **Concept:** Transitioned the automation system from a static data pipe to an intelligent, decision-making production layout by exploring n8n's conditional branching (`IF` Node).
+* **Logical Branching:** Implemented a data evaluation gate immediately following the `Split Out` array extraction layer. Configured a dynamic numerical comparison check to trap item inventory state where `stock` is **Less Than 15**.
+* **Alert Infrastructure:** Integrated a live **Gmail API / SMTP Node** downstream on the `true` logical outcome path. Designed an autonomous multi-variable email notification payload that dynamically fires custom real-time alert vectors directly to the ops team when stock thresholds drop, leaving the `false` data to process cleanly without triggering notifications.
