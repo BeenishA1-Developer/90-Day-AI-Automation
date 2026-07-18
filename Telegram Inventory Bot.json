@@ -1,0 +1,205 @@
+{
+  "name": "Telegram Inventory Bot",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "id": "35f276e2-72c3-4773-a19c-478f17b9182e",
+      "name": "Telegram Trigger",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        112
+      ],
+      "webhookId": "126f72a6-e4f3-40ec-bf21-a574eec7afce",
+      "credentials": {
+        "telegramApi": {
+          "id": "tkFYQcD4Zq3wTC15",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "1f5johuV77EFY_ulDJqB3Fx-5eorbT8OMT0tSV9ZDDLU",
+          "cachedResultName": "Inventory Automation",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1f5johuV77EFY_ulDJqB3Fx-5eorbT8OMT0tSV9ZDDLU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "name",
+          "value": "Sheet1",
+          "cachedResultName": "Sheet1"
+        },
+        "options": {}
+      },
+      "id": "4ed3af1f-6596-43d1-b13d-30ca363de86b",
+      "name": "Get Inventory",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        224,
+        112
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "UsAhc692SX7H6Ytb",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const rows = $input.all().map(i => i.json);\nconst userMessage = $('Telegram Trigger').first().json.message.text;\nreturn [{ json: { inventory: JSON.stringify(rows), userMessage } }];"
+      },
+      "id": "2ff23d39-d0ee-4195-96b5-1eb3d484b2c3",
+      "name": "Combine Inventory",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        448,
+        112
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a smart, direct, and helpful inventory assistant.\nHere is our live store inventory data fetched from Google Sheets:\n{{ $json.inventory }}\n\nAnd here is the incoming user message:\n{{ $json.userMessage }}\n\nInstructions:\n- Rule 1 (Inventory Queries): If the user is asking about the availability, price, or stock of any product listed in the inventory (e.g., Laptop, Mouse, Keyboard, Headphones, Charger, Mobile), extract their intent, match it with the correct row, and respond with a very clear, natural, short, and friendly single-sentence answer in Roman Urdu (e.g., 'Ji bilkul, Laptop available hai, iski price Rs. 75000 hai aur 10 units stock mein hain.').\n- Rule 2 (Casual Chat & Greetings): If the user says 'Hi', 'Hello', or asks a generic question not related to a product, reply to them directly in a very polite, friendly, and short manner in Roman Urdu without mentioning any inventory details or raw JSON text. Do not expose any backend formatting.",
+        "batching": {}
+      },
+      "id": "bb508380-1204-4dce-a2a9-83bcd47d2517",
+      "name": "Inventory Assistant",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        672,
+        112
+      ]
+    },
+    {
+      "parameters": {
+        "options": {
+          "maxTokens": 512,
+          "temperature": 0.7
+        }
+      },
+      "id": "8172e100-26b8-495a-bc4f-2a0453be1084",
+      "name": "OpenRouter Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        752,
+        336
+      ],
+      "credentials": {
+        "openRouterApi": {
+          "id": "RtnLIRQ0rmK9hEnT",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "6598740944",
+        "text": "={{ $json.text }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "id": "a870d9e0-c039-4970-8089-79d295fdf035",
+      "name": "Send Reply",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1024,
+        112
+      ],
+      "webhookId": "44144030-981c-4c39-9823-3941f73052a0",
+      "credentials": {
+        "telegramApi": {
+          "id": "tkFYQcD4Zq3wTC15",
+          "name": "Telegram account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get Inventory",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Inventory": {
+      "main": [
+        [
+          {
+            "node": "Combine Inventory",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Combine Inventory": {
+      "main": [
+        [
+          {
+            "node": "Inventory Assistant",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Inventory Assistant": {
+      "main": [
+        [
+          {
+            "node": "Send Reply",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Inventory Assistant",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "bf86c437-a657-4be4-b196-bdefacad8b3d",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "9e0f2868dccfab550b88736ef0b63ac00906eb09480dc053167f889c67284e15"
+  },
+  "nodeGroups": [],
+  "id": "AgTzICpi6Kto4GNr",
+  "tags": []
+}
