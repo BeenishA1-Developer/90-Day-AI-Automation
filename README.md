@@ -152,6 +152,6 @@ This week, I transitioned into backend development using FastAPI. I learned the 
 ### 📝 Day 37: Enterprise AI Inventory Assistant - Live Portfolio Demo
 * **Concept:** Created a complete system walkthrough and deployment documentation for a production-grade automation ecosystem to showcase as a main portfolio milestone.
 * **System Video Walkthrough:** 
-  > 🔗 **[Watch the Live System Walkthrough & Demo Here](https://drive.google.com/file/d/1XzW5Gz9jW_vB9T78hM76p2aQ5XmK3W_V/view?usp=sharing)**
+  > 🔗 **[Watch the Live System Walkthrough & Demo Here](https://drive.google.com/file/d/1jcDDEI0gNYPgf97G2mfjKK3H13I4izmg/view?usp=sharing)**
 * **Architecture Stack:** Telegram Bot API ➔ Webhook Trigger ➔ n8n Advanced AI Agent ➔ OpenRouter Gateway (`Llama-3.3-70b`) ➔ Google Sheets DB Sync.
 * **Production Engineering:** Documented strict prompt injection frameworks to remove LLM hallucinations, integrated automated zero-match safe fallbacks for unlisted stock queries, and verified single-response delivery per query during manual testing.
