@@ -186,4 +186,4 @@ This production-ready AI Automation Bot shifts the retail business from manual o
 ### 📈 Projected Impact & ROI (Estimated Metrics)
 * **Time Optimization:** Estimated **80%+ reduction** in manual customer chat handling time, freeing up the team to focus entirely on logistics and fulfillment.
 * **Order Accuracy:** Projected reduction in order-logging errors down to **under 1%**, eliminating financial losses from incorrect dispatches.
-* **Customer Retention:** Response speed drops from hours to instantaneous (averaging **under 5 seconds**), significantly scaling engagement and conversion rates.
+* **Customer Retention (Estimated):** Response time reduced from hours (manual coordination) to seconds — tested execution times in this system averaged 1.3–5.5 seconds per query.
