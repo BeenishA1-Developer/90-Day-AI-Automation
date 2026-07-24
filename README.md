@@ -44,6 +44,62 @@
 
 ---
 
+### 📝 Day 1: Variables & Setup
+* **Concept:** Python development environment configuration and understanding core primitive data types (Strings, Integers, Floats, Booleans).
+* **Implementation:** Created basic data variables and verified correct syntax execution in the local console terminal.
+
+### 📝 Day 2: Mini Calculator
+* **Concept:** Capturing real-time user inputs via `input()` data streams and parsing dynamic text data into numerical formats.
+* **Implementation:** Built a sequential console terminal application capable of executing fundamental arithmetic operations.
+
+### 📝 Day 3: Grade System
+* **Concept:** Introduction to conditional branching statements using `if`, `elif`, and `else` logic gates.
+* **Implementation:** Structured an automated processing algorithm to evaluate numerical scores and return precise academic classifications.
+
+### 📝 Day 4: Number Guessing Game
+* **Concept:** Working with iterative execution paths using `while` loops and integrating the native Python `random` standard utility.
+* **Implementation:** Designed an interactive script that dynamically targets pseudo-random numbers based on continuous feedback cycles.
+
+### 📝 Day 5: Calculator with Functions
+* **Concept:** Maximizing code modularity, isolation, and reusability profiles by creating custom functional definitions using the `def` keyword.
+* **Implementation:** Refactored basic calculation scripts into isolated functional blocks processing parameter passing and returning data outputs.
+
+### 📝 Day 6: Student Management System
+* **Concept:** Advanced data organization techniques utilizing complex built-in structures including multidimensional Lists and Key-Value Dictionaries.
+* **Implementation:** Created an interactive script to structurally log, update, track, and display independent student records.
+
+### 📝 Day 7: README + Week 1 Revision
+* **Concept:** Developing clean engineering documentation frameworks using standard markdown syntax.
+* **Implementation:** Documented all programming paradigms covered in Week 1, creating structural progress logs for technical review.
+
+### 📝 Day 8: Notes App - File Handling
+* **Concept:** Introduction to persistent data operations using Python's primitive file input/output workflows (`open()`, `write()`, `read()`).
+* **Implementation:** Built a persistent plain-text logging tool capable of writing and preserving custom textual inputs between terminal runtimes.
+
+### 📝 Day 9: Secure Calculator - Exception Handling
+* **Concept:** Implementation of defensive validation barriers using structural `try` and `except` runtime blocks.
+* **Implementation:** Protected arithmetic execution logic against critical application runtime crashes (such as `ZeroDivisionError` and `ValueError`).
+
+### 📝 Day 10: Random Password Generator
+* **Concept:** Dynamic string handling and randomization operations by combining structural parameters from the native `string` and `random` standard libraries.
+* **Implementation:** Formulated a utility script to dynamically construct secure passwords based on configurable lengths and complex data variables.
+
+### 📝 Day 11: Weather Check App - `requests` Library
+* **Concept:** Introduction to network communication pipelines by sending external outbound HTTP requests using the `requests` utility ecosystem.
+* **Implementation:** Fetched unstructured remote live server states and parsed return data payloads directly within the native script terminal.
+
+### 📝 Day 12: JSON Data Handler
+* **Concept:** Mastering data serialization formats by converting complex nested Python data dictionaries directly into standard raw JSON strings.
+* **Implementation:** Developed an active interface script to read and write records into persistent local `.json` file sheets seamlessly.
+
+### 📝 Day 13: Expense Tracker
+* **Concept:** Combining lists, dictionaries, file handling, and JSON modules into a single practical data state architecture.
+* **Implementation:** Engineered an execution utility capable of dynamically documenting financial profiles, modifying balance histories, and caching parameters cleanly.
+
+### 📝 Day 14: Week 2 Revision + Code Cleanup
+* **Concept:** Code refactoring methodologies, identifying formatting issues, and cleaning execution scopes.
+* **Implementation:** Polished intermediate script backlines, optimized validation loops, and structured files for performance.
+
 ### 📝 Day 15: Public API Integration
 * **Concept:** Learnt how to fetch live data from a public API using the `requests` library.
 * **Error Handling:** Implemented network-level validation using `try-except` blocks to handle connection dropouts.
