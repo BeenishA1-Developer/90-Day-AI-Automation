@@ -159,12 +159,12 @@ This week, I transitioned into backend development using FastAPI. I learned the 
 * **Production Engineering:** Documented strict prompt injection frameworks to remove LLM hallucinations, integrated automated zero-match safe fallbacks for unlisted stock queries, and verified single-response delivery per query during manual testing.
 
 ### 📝 Day 38: Telegram E-Commerce Order Booking Bot Integration
-* **Concept:** Expanded the AI assistant from a simple inventory lookup tool into a dynamic, transactional transactional e-commerce bot capable of conversational checkout.
+* **Concept:** Expanded the AI assistant from a simple inventory lookup tool into a dynamic, transactional e-commerce bot capable of conversational checkout.
 * **Implementation:** Programmed the conversation state parameters to systematically capture explicit order fields: item selection, exact quantities, contact information, delivery address, and preferred payment methods.
 * **Data Logging:** Configured an external `Order details` relational structure inside Google Sheets to map user records into rows, ensuring incoming transactions are staged for full processing.
 
 ### 📝 Day 39: Robust E-Commerce Order Flow & Architecture Upgrade
 * **Concept:** Upgraded the system architecture by completely separating the AI Agent's cognitive reasoning loop from database data persistence operations.
 * **Architecture Enhancement:** Implemented a dedicated `book_order` Google Sheets tool node that executes appending data operations independently from the main chat workflow. Integrated a structural system prompt layout to ensure 100% data alignment between runtime text payloads and Google Sheets columns schema.
-* **Bug Fixes:** Resolved a critical hallucination and duplicate response bug by turning on the `Execute Once` processing parameters inside n8n settings, eliminating phantom multi-item order entries (e.g., the "5 mice" injection bug).
+* **Bug Fixes:** Fixed the critical hallucination and duplicate response bug by redesigning the system prompt with strict item-tracking rules and separating order-logging into a dedicated tool node. This ensures the data pipeline is strictly 1:1 matching the customer's exact verbal intent, completely eliminating random or phantom item injections (e.g., the "5 mice" bug).
 * **Validation & Typo Resilience:** Added automated dynamic order verification summaries before final sheet writing logic. Successfully validated high semantic matching capabilities, allowing the bot to parse customer shorthand and typos (e.g., processing "4 moi" flawlessly as 4 Mobiles) without session degradation.
