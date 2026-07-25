@@ -46,7 +46,7 @@
 ## Day 38 — Conversational Order Booking Bot
 **Concept:** Transactional E-commerce Checkout Flow
 **Key Point:** Conversational flow ke andar explicit fields (item, quantity, delivery data) ko capture karke parallel processing database columns ke liye stage karna.
-**Common mistake:** Strict sequential slots use na karna → customer input data mix up ho jana ya incomplete data save hona.
+**Common mistake:** (Note: Not directly tested as a bug, general best practice) Conversational slots loosely chorna jis se model data parameters ko misalign kar de.
 
 ## Day 39 — E-Commerce Order Flow (Phantom-Item Fix)
 **Concept:** Decoupled Cognitive Loop + Tool Separation
