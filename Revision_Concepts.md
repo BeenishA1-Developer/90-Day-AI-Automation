@@ -38,6 +38,16 @@
 **Key Point:** OpenRouter free tier models ko strict prompt injection ke zariye sirf Google Sheets data par bound (ground) rakhna.
 **Common mistake:** Open-ended prompt chorna → AI ka out-of-stock items ke liye fake prices aur ghost stock invent karna.
 
+## Day 37 — Enterprise AI Assistant Showcase
+**Concept:** System documentation & Technical Walkthrough
+**Key Point:** Production-grade system architecture ko end-to-end user ke liye visual video aur data sync diagrams ke sath explain karna portfolio impact ke liye.
+**Common mistake:** Live edge cases aur verification metrics show na karna → client ko tool ki reliability ka proof na milna.
+
+## Day 38 — Conversational Order Booking Bot
+**Concept:** Transactional E-commerce Checkout Flow
+**Key Point:** Conversational flow ke andar explicit fields (item, quantity, delivery data) ko capture karke parallel processing database columns ke liye stage karna.
+**Common mistake:** Strict sequential slots use na karna → customer input data mix up ho jana ya incomplete data save hona.
+
 ## Day 39 — E-Commerce Order Flow (Phantom-Item Fix)
 **Concept:** Decoupled Cognitive Loop + Tool Separation
 **Key Point:** AI ki sochne ki logic aur order write karne ki logic (`book_order` node) ko alag karna taake phantom items produce na hon.
