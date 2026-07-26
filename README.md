@@ -243,3 +243,13 @@ This production-ready AI Automation Bot shifts the retail business from manual o
 * **Time Optimization:** Estimated **80%+ reduction** in manual customer chat handling time, freeing up the team to focus entirely on logistics and fulfillment.
 * **Order Accuracy:** Projected reduction in order-logging errors down to **under 1%**, eliminating financial losses from incorrect dispatches.
 * **Customer Retention (Estimated):** Response time reduced from hours (manual coordination) to seconds — tested execution times in this system averaged 1.3–5.5 seconds per query.
+
+### Project 2: DesiBites Restaurant Order Bot (AI-Driven Automation)
+An intelligent restaurant ordering system built using n8n, Telegram Bot API, and Google Sheets, powered by advanced AI reasoning.
+
+🔗 **[🎥 Click Here to Watch the Full Demo Video](https://drive.google.com/file/d/15FMvdKWMEz8DHJEqdwlCN_A8R4ccqD-q/view?usp=sharing)**
+
+**Key Differentiators & Edge Cases Handled:**
+- **Unavailable-Item Handling:** If a user orders an item marked as out of stock (`Available: No`), the AI automatically detects its category and suggests a relevant available alternative.
+- **Non-Existent Item Guardrail:** If a user orders something completely outside the restaurant's menu, the bot intelligently flags it as non-existent and prompts them to choose from the current menu.
+- **Conversational Parsing & Automation:** Extracts multiple items/quantities from messy text, calculates the exact bill, and logs everything to Google Sheets in real-time.
