@@ -1,6 +1,7 @@
 # 🚀 90-Day AI Automation Journey — Progress Tracker
 
 | Day | Project / Concept | Status |
+| :--- | :--- | :---: |
 | **Day 1** | Variables & Setup | ✅ |
 | **Day 2** | Mini Calculator | ✅ |
 | **Day 3** | Grade System | ✅ |
@@ -231,6 +232,7 @@ This week, I transitioned into backend development using FastAPI. I learned the 
     * **Unavailable-Item Handling:** Engineered logic where ordering out-of-stock items (`Available: No`) triggers the AI to dynamically detect the food category and suggest contextual, available alternatives.
     * **Non-Existent Item Guardrails:** Set strict boundaries so that ordering items outside the menu flags the request safely as non-existent and naturally guides the user back to valid menu choices.
     * **Conversational Parsing:** Seamlessly extracts multiple food items and quantities from unstructured/messy user text, calculates the exact bill totals, and commits rows to Google Sheets dynamically.
+    * **Admin Notification System:** Implemented a dedicated notification tool that automatically alerts the restaurant owner via Telegram with full order details immediately after every confirmed order — decoupled from the customer-facing reply for reliability. *(Note: Initially attempted via WhatsApp Business API; switched to Telegram after diagnosing a template-configuration error to ensure 100% operational uptime).*
 * **System Video Walkthrough:**
   > 🔗 **[🎥 Click Here to Watch the Full Demo Video](https://drive.google.com/file/d/15FMvdKWMEz8DHJEqdwlCN_A8R4ccqD-q/view?usp=sharing)**
 
