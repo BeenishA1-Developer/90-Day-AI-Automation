@@ -1,7 +1,6 @@
 # 🚀 90-Day AI Automation Journey — Progress Tracker
 
 | Day | Project / Concept | Status |
-| :--- | :--- | :---: |
 | **Day 1** | Variables & Setup | ✅ |
 | **Day 2** | Mini Calculator | ✅ |
 | **Day 3** | Grade System | ✅ |
@@ -41,6 +40,7 @@
 | **Day 37** | Enterprise AI Inventory Assistant - Live Portfolio Demo | ✅ |
 | **Day 38** | Telegram E-Commerce Order Booking Bot Integration | ✅ |
 | **Day 39** | Robust E-Commerce Order Flow & Architecture Upgrade | ✅ |
+| **Day 40** | DesiBites Restaurant Order Bot (AI-Driven Automation) | ✅ |
 
 ---
 
@@ -225,6 +225,17 @@ This week, I transitioned into backend development using FastAPI. I learned the 
 * **Bug Fixes:** Fixed the critical hallucination and duplicate response bug by redesigning the system prompt with strict item-tracking rules and separating order-logging into a dedicated tool node. This ensures the data pipeline is strictly 1:1 matching the customer's exact verbal intent, completely eliminating random or phantom item injections (e.g., the "5 mice" bug).
 * **Validation & Typo Resilience:** Added automated dynamic order verification summaries before final sheet writing logic. Successfully validated high semantic matching capabilities, allowing the bot to parse customer shorthand and typos (e.g., processing "4 moi" flawlessly as 4 Mobiles) without session degradation.
 
+### 📝 Day 40: DesiBites Restaurant Order Bot (AI-Driven Automation)
+* **Concept:** Developed an intelligent restaurant ordering system built using n8n, Telegram Bot API, and Google Sheets, powered by advanced AI reasoning frameworks.
+* **Implementation:** Handled advanced conversational edge cases to build an end-to-end automated checkout mechanism:
+    * **Unavailable-Item Handling:** Engineered logic where ordering out-of-stock items (`Available: No`) triggers the AI to dynamically detect the food category and suggest contextual, available alternatives.
+    * **Non-Existent Item Guardrails:** Set strict boundaries so that ordering items outside the menu flags the request safely as non-existent and naturally guides the user back to valid menu choices.
+    * **Conversational Parsing:** Seamlessly extracts multiple food items and quantities from unstructured/messy user text, calculates the exact bill totals, and commits rows to Google Sheets dynamically.
+* **System Video Walkthrough:**
+  > 🔗 **[🎥 Click Here to Watch the Full Demo Video](https://drive.google.com/file/d/15FMvdKWMEz8DHJEqdwlCN_A8R4ccqD-q/view?usp=sharing)**
+
+---
+
 ## 💼 Business Use Case: E-Commerce & Inventory Automation
 
 ### 🎯 The Problem
@@ -243,13 +254,3 @@ This production-ready AI Automation Bot shifts the retail business from manual o
 * **Time Optimization:** Estimated **80%+ reduction** in manual customer chat handling time, freeing up the team to focus entirely on logistics and fulfillment.
 * **Order Accuracy:** Projected reduction in order-logging errors down to **under 1%**, eliminating financial losses from incorrect dispatches.
 * **Customer Retention (Estimated):** Response time reduced from hours (manual coordination) to seconds — tested execution times in this system averaged 1.3–5.5 seconds per query.
-
-### Project 2: DesiBites Restaurant Order Bot (AI-Driven Automation)
-An intelligent restaurant ordering system built using n8n, Telegram Bot API, and Google Sheets, powered by advanced AI reasoning.
-
-🔗 **[🎥 Click Here to Watch the Full Demo Video](https://drive.google.com/file/d/15FMvdKWMEz8DHJEqdwlCN_A8R4ccqD-q/view?usp=sharing)**
-
-**Key Differentiators & Edge Cases Handled:**
-- **Unavailable-Item Handling:** If a user orders an item marked as out of stock (`Available: No`), the AI automatically detects its category and suggests a relevant available alternative.
-- **Non-Existent Item Guardrail:** If a user orders something completely outside the restaurant's menu, the bot intelligently flags it as non-existent and prompts them to choose from the current menu.
-- **Conversational Parsing & Automation:** Extracts multiple items/quantities from messy text, calculates the exact bill, and logs everything to Google Sheets in real-time.
