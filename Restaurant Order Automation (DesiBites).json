@@ -8,7 +8,7 @@
         ],
         "additionalFields": {}
       },
-      "id": "013bba6c-ba7b-4398-8067-cb63fa994801",
+      "id": "d8f7e6b5-bc17-4901-9fdb-5688874ebebe",
       "name": "Telegram Trigger",
       "type": "n8n-nodes-base.telegramTrigger",
       "typeVersion": 1.5,
@@ -16,10 +16,10 @@
         0,
         112
       ],
-      "webhookId": "95b0e1ee-7d18-46a2-ad06-438637ab7ba7",
+      "webhookId": "bdefdd41-27c6-4baf-a2db-054006e36edc",
       "credentials": {
         "telegramApi": {
-          "id": "RNnH0dpALxFsEmPU",
+          "id": "zjmh4yTZD1PXo0xU",
           "name": "Telegram account"
         }
       }
@@ -29,11 +29,11 @@
         "promptType": "define",
         "text": "={{ $json.message.text }}",
         "options": {
-          "systemMessage": "You are DesiBites, the friendly ordering assistant for a Pakistani restaurant on Telegram.\n\nTOOLS:\n- get_menu: reads the live Menu (Item_ID, Item_Name, Category, Price_PKR, Available, and Unit if present). ALWAYS call this to ground any recommendation, price, or availability answer.\n- book_order: appends ONE confirmed order to the Orders sheet. Call ONLY after explicit customer confirmation. You must generate a unique Order_ID (format ORD-<unix-timestamp-ms>, e.g. ORD-1730000000000) and pass it to book_order.\n- notify_admin: sends a Telegram notification with the order details to the restaurant owner (Admin). See the ADMIN NOTIFICATION rules below.\n\nGROUNDING RULES (strict):\n1. Only ever recommend or accept items that appear in get_menu results AND have Available = \"Yes\".\n2. NEVER invent items, prices, or categories. If unsure, call get_menu again.\n3. If a requested item has Available = \"No\" (or is not on the menu), apologize briefly and suggest an available alternative from the SAME Category.\n\nHOW TO SHOW THE MENU:\nPresent available items as a NUMBERED list so the customer can just reply with a number to pick an item. For each item include the price AND its serving unit. Use the Unit column value if present (e.g. \"per plate\", \"per kg\"); if there is no Unit column, default to \"per plate\". Example format:\n1. Chicken Biryani (Main Course) - 350 PKR per plate\n2. Garlic Naan (Bread) - 60 PKR per piece\nTell the customer they can reply with the item number(s) and quantity.\n\nSLOT FILLING — collect ALL of these before booking:\n(a) Item name(s) + quantity\n(b) Customer name\n(c) Delivery address\n(d) Contact phone number\n(e) Any specific note (e.g. spicy / not spicy). This one is optional — if the customer has none, record it as \"None\".\nAsk for missing details conversationally, one friendly step at a time. Keep a running total in PKR using Price_PKR from the menu.\n\nCONFIRMATION & BOOKING (anti-phantom):\n- Before booking, show the customer a clear summary: each item x quantity with unit price, the total bill in PKR, their name, delivery address, contact number, and any special note.\n- Only call book_order after the customer explicitly confirms (e.g. \"yes\", \"confirm\", \"place it\"). Generate a unique Order_ID and pass Order_ID, Customer_Name, a readable Items_Ordered summary, the numeric Total_Bill_PKR, Address, Contact and Special_Note.\n- Never call book_order with missing or guessed fields (name, address, and contact are all required), and never book more than the confirmed items.\n- After a successful booking, give the customer the Order_ID/confirmation and let them know the order is Received.\n\nADMIN NOTIFICATION (MUST / ANTI-PHANTOM — non-negotiable):\n- The moment book_order returns successfully, you MUST call notify_admin exactly ONCE, in the SAME turn, before you send the customer their confirmation message. This is a required step, not optional.\n- Pass notify_admin the EXACT same values you sent to book_order plus the Order_ID: Order_ID, Customer_Name, Items_Ordered, Total_Bill_PKR, Address, Contact, Special_Note. Do NOT alter, re-summarise, or round any of these values.\n- ANTI-PHANTOM: NEVER claim, imply, or tell the customer that the owner/kitchen \"has been notified\" unless notify_admin has actually returned successfully in this turn. Do not fabricate a notification.\n- If book_order FAILS or was not called, do NOT call notify_admin. notify_admin runs ONLY after a real, successful book_order. If book_order fails, tell the customer there was a technical issue and do NOT claim the order was placed.\n- Call notify_admin at most ONCE per confirmed order — never send duplicate admin notifications for the same order.\n- SILENT EXECUTION (strict): notify_admin runs COMPLETELY in the background. NEVER print, output, quote, repeat, paraphrase, or show the admin notification text (e.g. \"🍽️ NEW ORDER — DesiBites...\") or any part of it to the customer. The customer must never see that an admin message was sent or what it contained. After notify_admin returns successfully, reply to the customer with ONLY the friendly order confirmation message (Order_ID and that the order is Received) — nothing about the admin notification.\n\nKeep replies concise and warm. Prices are always in PKR.",
+          "systemMessage": "You are DesiBites, the friendly ordering assistant for a Pakistani restaurant on Telegram.\n\nTOOLS:\n- get_menu: reads the live Menu (Item_ID, Item Name, Category, Price, Available). ALWAYS call this to ground any recommendation, price, or availability answer.\n- book_order: appends ONE confirmed order to the Orders sheet. Call ONLY after explicit customer confirmation. You must generate a unique Order_ID (format ORD-<unix-timestamp-ms>, e.g. ORD-1730000000000) and pass it to book_order.\n- notify_admin: sends a Gmail email notification with the order details to the restaurant owner. See the ADMIN NOTIFICATION rules below.\n\nGROUNDING & EXACT ITEM MAPPING RULES (strict):\n1. Every menu item has a permanent, hardcoded 'Item_ID' (from 1 to 67) in the database.\n2. When a customer selects numbers (e.g., \"14, 23, 35\"), you MUST explicitly match their input directly against the 'Item_ID' column fetched from get_menu. \n3. NEVER dynamically recalculate, guess, or shift an item's position by counting lines. \n4. Only ever recommend or accept items that appear in get_menu results AND have Available = \"Yes\" (or \"Y\").\n5. NON-EXISTENT GUARDRAIL: If a user enters an ID that does not exist in the sheet (e.g., 68 or above), you MUST immediately reject it politely in Roman Urdu and ask them to choose a valid number from the menu.\n6. If a requested item has Available = \"No\" (or \"N\"), apologize briefly and suggest an available alternative from the SAME Category.\n\nHOW TO SHOW THE MENU:\nPresent available items using their permanent 'Item_ID' as a fixed numbered list so the customer can reply with that ID to pick an item. For each item include the price. Example format:\n1. Hot & Sour Soup (Starters & Soups) - 220 PKR per plate\n8. Chicken Karahi (Half) (Main Course (Desi)) - 750 PKR per plate\nTell the customer they can reply with the item number(s) (Item_ID) and quantity.\n\nSLOT FILLING — collect ALL of these before booking:\n(a) Item name(s) + quantity (Mapped strictly via Item_ID)\n(b) Customer name\n(c) Delivery address\n(d) Contact phone number\n(e) Any specific note (e.g. spicy / not spicy). This one is optional — if the customer has none, record it as \"None\".\nAsk for missing details conversationally, one friendly step at a time. Double-check your addition using the exact 'Price' column to ensure 100% mathematical accuracy.\n\nPHONE NUMBER VALIDATION RULE (strict):\n- When collecting the (d) Contact phone number, you MUST strictly validate it before moving forward.\n- A valid Pakistani mobile number must be exactly 11 digits starting with '03' (e.g., 03001234567) OR exactly 13 characters starting with '+923' (e.g., +923001234567).\n- If the user provides any invalid format, reject it politely in Roman Urdu and ask them to re-enter a valid Pakistani mobile number starting with 03 or +92. Do NOT proceed until a valid number is provided.\n\nCONFIRMATION & BOOKING (anti-phantom):\n- Before booking, show the customer a clear summary: each item x quantity with unit price, the total bill in PKR, their name, delivery address, contact number, and any special note.\n- Only call book_order after the customer explicitly confirms (e.g. \"yes\", \"confirm\", \"place it\"). Generate a unique Order_ID and pass Order_ID, Customer_Name, a readable Items_Ordered summary, the numeric Total_Bill_PKR, Address, Contact and Special_Note.\n\nADMIN NOTIFICATION (MUST / ANTI-PHANTOM — non-negotiable):\n- The moment book_order returns successfully, you MUST call notify_admin exactly ONCE, in the SAME turn, before you send the customer their confirmation message.\n- Pass notify_admin the EXACT same values you sent to book_order plus the Order_ID: Order_ID, Customer_Name, Items_Ordered, Total_Bill_PKR, Address, Contact, Special_Note.\n- SILENT EXECUTION (strict): The notification tool runs COMPLETELY in the background. NEVER show the admin notification text to the customer. After the tool returns successfully, reply to the customer with ONLY the friendly order confirmation message.\n\nOUTPUT FORMATTING (STRICT — Telegram plain text):\n- Reply in PLAIN TEXT ONLY. Do NOT use any Markdown or HTML formatting.\n- NEVER use asterisks (*), underscores (_), backticks (`), tilde (~), square brackets ([ ]), or angle brackets (< >) for formatting.\n- Do not create bold, italic, code blocks, or links. Use plain words, simple line breaks, numbers, and emojis only. Telegram will reject formatted entities and the message will fail to send.\n\nKeep replies concise and warm. Prices are always in PKR.",
           "maxIterations": 10
         }
       },
-      "id": "073ba376-70fd-490f-bd05-2a58ff5ef59a",
+      "id": "0052b875-3124-4a92-a93f-dd036397afd0",
       "name": "Order Agent",
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 3.1,
@@ -45,12 +45,13 @@
     },
     {
       "parameters": {
+        "model": "openrouter/free",
         "options": {
-          "maxTokens": 2048,
+          "maxTokens": 1000,
           "temperature": 0.2
         }
       },
-      "id": "b4f146d6-298a-49a6-ad15-3ed42927ee14",
+      "id": "baabc70d-3638-46da-8079-da6a6f393a85",
       "name": "OpenRouter Chat Model",
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
       "typeVersion": 1,
@@ -60,7 +61,7 @@
       ],
       "credentials": {
         "openRouterApi": {
-          "id": "vAZ6E2xEcQUQOu86",
+          "id": "D25NtuwCrSt8kS94",
           "name": "OpenRouter account"
         }
       }
@@ -68,10 +69,10 @@
     {
       "parameters": {
         "sessionIdType": "customKey",
-        "sessionKey": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
-        "contextWindowLength": 15
+        "sessionKey": "={{ $('Telegram Trigger').item.json.message.chat.id }}_v2",
+        "contextWindowLength": 3
       },
-      "id": "9921de8c-fa46-407a-bbc5-6e13abd3ba24",
+      "id": "250c19e7-e38a-4c0f-92be-5cde5253aafd",
       "name": "Window Buffer Memory",
       "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
       "typeVersion": 1.4,
@@ -86,19 +87,21 @@
         "toolDescription": "Read the full restaurant Menu. Returns rows with columns Item_ID, Item_Name, Category, Price_PKR, Available, and (if present) Unit (e.g. \"per plate\" or \"per kg\"). Use this to check whether an item exists, its price, its serving unit, its category, and whether Available equals \"Yes\" before recommending or ordering it. Never suggest an item that is not returned here or whose Available is \"No\".",
         "documentId": {
           "__rl": true,
-          "value": "1pa91XERsWQ6pPTBoIKSU6Co4h9QaAbPwvKCara3Y5Vo",
+          "value": "1hLbMhStq_E0XN0_XZOI_lyJaYV_1qlkF2EBJmWl0G_Q",
           "mode": "list",
           "cachedResultName": "Restaurant_Order_Bot_Database",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1pa91XERsWQ6pPTBoIKSU6Co4h9QaAbPwvKCara3Y5Vo/edit?usp=drivesdk"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1hLbMhStq_E0XN0_XZOI_lyJaYV_1qlkF2EBJmWl0G_Q/edit?usp=drivesdk"
         },
         "sheetName": {
           "__rl": true,
-          "value": "Menu",
-          "mode": "name"
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Menu",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1hLbMhStq_E0XN0_XZOI_lyJaYV_1qlkF2EBJmWl0G_Q/edit#gid=0"
         },
         "options": {}
       },
-      "id": "2240d288-b71f-43c3-b28f-933bc970d759",
+      "id": "31d8e9ee-fbc4-4809-bb23-4ecbb78dad2e",
       "name": "get_menu",
       "type": "n8n-nodes-base.googleSheetsTool",
       "typeVersion": 4.7,
@@ -108,80 +111,36 @@
       ],
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "BZZ8QhsnToq3EOgU",
-          "name": "Google Sheets account 2"
+          "id": "qwcTtHfsRsROf9q3",
+          "name": "Google Sheets account"
         }
       }
     },
     {
       "parameters": {
-        "chatId": "6598740944",
-        "text": "=🍽️ NEW ORDER — DesiBites\n\n🆔 Order: {{ $fromAI('Order_ID', 'The Order_ID returned by book_order, e.g. ORD-1730000000000') }}\n👤 Customer: {{ $fromAI('Customer_Name', 'The customer full name for this order') }}\n📞 Contact: {{ $fromAI('Contact', 'The customer contact phone number') }}\n🧾 Items: {{ $fromAI('Items_Ordered', 'A readable summary of items and quantities, e.g. \"2x Chicken Biryani, 1x Coke\"') }}\n💰 Total: {{ $fromAI('Total_Bill_PKR', 'The total bill for all ordered items in PKR as a number', 'number') }} PKR\n📍 Address: {{ $fromAI('Address', 'The customer delivery address') }}\n📝 Note: {{ $fromAI('Special_Note', 'Any specific note, e.g. \"extra spicy\". Use \"None\" if the customer has no note.') }}",
-        "additionalFields": {
+        "descriptionType": "manual",
+        "toolDescription": "Send an EMAIL notification of a confirmed order to the restaurant owner (Admin). You MUST call this exactly ONCE immediately after book_order returns successfully, before sending the customer their confirmation. Pass the EXACT same values used for book_order plus the Order_ID: Order_ID, Customer_Name, Items_Ordered, Total_Bill_PKR, Address, Contact, Special_Note. Do not call this for browsing, questions, or unconfirmed carts, and never call it if book_order failed or was not called.",
+        "sendTo": "pagalkuria1@gmail.com",
+        "subject": "=🍽️ New Order — DesiBites ({{ $fromAI('Order_ID', 'The Order_ID returned by book_order, e.g. ORD-1730000000000') }})",
+        "emailType": "text",
+        "message": "=🍽️ NEW ORDER — DesiBites\n\n🆔 Order: {{ $fromAI('Order_ID', 'The Order_ID returned by book_order, e.g. ORD-1730000000000') }}\n👤 Customer: {{ $fromAI('Customer_Name', 'The customer full name for this order') }}\n📞 Contact: {{ $fromAI('Contact', 'The customer contact phone number') }}\n🧾 Items: {{ $fromAI('Items_Ordered', 'A readable summary of items and quantities, e.g. \"2x Chicken Biryani, 1x Coke\"') }}\n💰 Total: {{ $fromAI('Total_Bill_PKR', 'The total bill for all ordered items in PKR as a number', 'number') }} PKR\n📍 Address: {{ $fromAI('Address', 'The customer delivery address') }}\n📝 Note: {{ $fromAI('Special_Note', 'Any specific note, e.g. \"extra spicy\". Use \"None\" if the customer has no note.') }}",
+        "options": {
           "appendAttribution": false
         }
       },
-      "id": "ebccdce7-b276-4f0f-bd47-5be8a626bd41",
+      "id": "8f10074b-7eab-44df-8241-424b37772643",
       "name": "notify_admin",
-      "type": "n8n-nodes-base.telegramTool",
-      "typeVersion": 1.2,
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.2,
       "position": [
-        736,
+        608,
         336
       ],
-      "webhookId": "82baebaf-1d99-452f-8918-09e398a643dc",
+      "webhookId": "8b4eebc9-d715-4898-b51e-50adcd741e50",
       "credentials": {
-        "telegramApi": {
-          "id": "RNnH0dpALxFsEmPU",
-          "name": "Telegram account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
-        "text": "Sorry, something went wrong while processing your order. Please try again in a moment. 🙏",
-        "additionalFields": {
-          "appendAttribution": false
-        }
-      },
-      "id": "a747a122-63c5-4a4d-a7ff-3ed5ad0424ce",
-      "name": "Send Error Notice",
-      "type": "n8n-nodes-base.telegram",
-      "typeVersion": 1.2,
-      "position": [
-        944,
-        208
-      ],
-      "webhookId": "9caa7a1e-acef-40b7-8b5e-69a818435778",
-      "credentials": {
-        "telegramApi": {
-          "id": "RNnH0dpALxFsEmPU",
-          "name": "Telegram account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
-        "text": "={{ $json.output }}",
-        "additionalFields": {
-          "appendAttribution": false
-        }
-      },
-      "id": "ece81ac8-4ef7-4199-8545-5a57cc9f6af6",
-      "name": "Send Reply",
-      "type": "n8n-nodes-base.telegram",
-      "typeVersion": 1.2,
-      "position": [
-        944,
-        16
-      ],
-      "webhookId": "bf17f0d8-803d-4a9c-8a79-abfea411dc63",
-      "credentials": {
-        "telegramApi": {
-          "id": "RNnH0dpALxFsEmPU",
-          "name": "Telegram account"
+        "gmailOAuth2": {
+          "id": "QuJdxS8jJEqzYSh2",
+          "name": "Gmail account 2"
         }
       }
     },
@@ -192,17 +151,17 @@
         "operation": "append",
         "documentId": {
           "__rl": true,
-          "value": "1pa91XERsWQ6pPTBoIKSU6Co4h9QaAbPwvKCara3Y5Vo",
+          "value": "1hLbMhStq_E0XN0_XZOI_lyJaYV_1qlkF2EBJmWl0G_Q",
           "mode": "list",
           "cachedResultName": "Restaurant_Order_Bot_Database",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1pa91XERsWQ6pPTBoIKSU6Co4h9QaAbPwvKCara3Y5Vo/edit?usp=drivesdk"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1hLbMhStq_E0XN0_XZOI_lyJaYV_1qlkF2EBJmWl0G_Q/edit?usp=drivesdk"
         },
         "sheetName": {
           "__rl": true,
-          "value": 1689290071,
+          "value": 1966081793,
           "mode": "list",
           "cachedResultName": "Orders",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1pa91XERsWQ6pPTBoIKSU6Co4h9QaAbPwvKCara3Y5Vo/edit#gid=1689290071"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1hLbMhStq_E0XN0_XZOI_lyJaYV_1qlkF2EBJmWl0G_Q/edit#gid=1966081793"
         },
         "columns": {
           "mappingMode": "defineBelow",
@@ -306,18 +265,79 @@
         },
         "options": {}
       },
-      "id": "7839bc2d-7271-4032-aab3-316c9dbbaf18",
+      "id": "8aaff28b-eb52-449d-a83e-4bfee8bdde51",
       "name": "book_order",
       "type": "n8n-nodes-base.googleSheetsTool",
       "typeVersion": 4.7,
       "position": [
-        624,
-        384
+        736,
+        336
       ],
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "BZZ8QhsnToq3EOgU",
-          "name": "Google Sheets account 2"
+          "id": "qwcTtHfsRsROf9q3",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "Sorry, something went wrong while processing your order. Please try again in a moment. 🙏",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "id": "9e61cf2f-83c6-433a-8e3d-bcd427a11d82",
+      "name": "Send Error Notice",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        944,
+        208
+      ],
+      "webhookId": "4c3ef1ba-e4eb-47a6-b5e9-15f3462dee8b",
+      "credentials": {
+        "telegramApi": {
+          "id": "zjmh4yTZD1PXo0xU",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Sanitize the agent output so Telegram never rejects it for bad formatting entities.\nconst raw = $json.output != null ? String($json.output) : '';\nlet text = raw\n  .replace(/```[a-zA-Z]*\\n?/g, '') // opening code fences\n  .replace(/```/g, '')             // closing code fences\n  .replace(/[*_`~]/g, '')          // markdown emphasis / code chars\n  .replace(/[<>]/g, '');           // angle brackets (HTML entities)\ntext = text.trim();\nif (!text) {\n  text = 'Maaf kijiye, main abhi jawab nahi de paya. Dobara koshish karein.';\n}\nreturn [{ json: { output: text } }];"
+      },
+      "id": "97b57b71-91e3-4ac7-9655-cacc45c67b2f",
+      "name": "Clean Reply",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        944,
+        16
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "={{ $json.output }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "id": "15690048-9724-42fd-90ca-da233627eced",
+      "name": "Send Reply",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1168,
+        16
+      ],
+      "webhookId": "1c479528-186e-4673-abf1-e016bd1851d3",
+      "credentials": {
+        "telegramApi": {
+          "id": "zjmh4yTZD1PXo0xU",
+          "name": "Telegram account"
         }
       }
     }
@@ -339,7 +359,7 @@
       "main": [
         [
           {
-            "node": "Send Reply",
+            "node": "Clean Reply",
             "type": "main",
             "index": 0
           }
@@ -407,6 +427,17 @@
           }
         ]
       ]
+    },
+    "Clean Reply": {
+      "main": [
+        [
+          {
+            "node": "Send Reply",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": true,
@@ -415,12 +446,12 @@
     "binaryMode": "separate",
     "availableInMCP": false
   },
-  "versionId": "90bad7ac-6f39-4c72-b1f9-7129c951662b",
+  "versionId": "44f212f5-81a4-4d86-aeda-e58e66974234",
   "meta": {
     "templateCredsSetupCompleted": true,
-    "instanceId": "11a7ddf95fcc863145d09e2a96663d161d014fffacb6ea735e4ed94be2996357"
+    "instanceId": "6899d3aee0fcfc1adb4637de7df30f03ae73c0c083b39f1bf9b83e9346ee2ae8"
   },
   "nodeGroups": [],
-  "id": "ttWhGHh9AR2z8pn6",
+  "id": "DL5Hvnq2VQ1PZqMk",
   "tags": []
 }

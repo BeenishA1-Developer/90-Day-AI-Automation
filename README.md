@@ -233,6 +233,9 @@ This week, I transitioned into backend development using FastAPI. I learned the 
     * **Non-Existent Item Guardrails:** Set strict boundaries so that ordering items outside the menu flags the request safely as non-existent and naturally guides the user back to valid menu choices.
     * **Conversational Parsing:** Seamlessly extracts multiple food items and quantities from unstructured/messy user text, calculates the exact bill totals, and commits rows to Google Sheets dynamically.
     * **Admin Notification System:** Implemented a dedicated notification tool that automatically alerts the restaurant owner via Telegram with full order details immediately after every confirmed order — decoupled from the customer-facing reply for reliability. *(Note: Initially attempted via WhatsApp Business API; switched to Telegram after diagnosing a template-configuration error to ensure 100% operational uptime).*
+* **Bug Fixes & Hardening:**
+    * **Customer-Name Validation Field:** Resolved the customer-name-field garbage-data bug. If the name step is actively skipped by the user, the agent catches the omission and directly triggers an explicit re-prompt ("What's your full name?") instead of appending incomplete rows to the sheet.
+    * **Cosmetic Quantity-Parsing Fix:** Known cosmetic bug: confirmation text may misread portion labels like '(2 Pcs)' as quantity. Verified via Sheet row [ORD-1785397406151] — backend quantity/pricing unaffected. Fixed completely by simplifying structural text tags in the menu dataset.
 * **System Video Walkthrough:**
   > 🔗 **[🎥 Click Here to Watch the Full Demo Video](https://drive.google.com/file/d/15FMvdKWMEz8DHJEqdwlCN_A8R4ccqD-q/view?usp=sharing)**
 
@@ -254,5 +257,5 @@ This production-ready AI Automation Bot shifts the retail business from manual o
 
 ### 📈 Projected Impact & ROI (Estimated Metrics)
 * **Time Optimization:** Estimated **80%+ reduction** in manual customer chat handling time, freeing up the team to focus entirely on logistics and fulfillment.
-* **Order Accuracy:** Projected reduction in order-logging errors down to **under 1%**, eliminating financial losses from incorrect dispatches.
+* **Order Accuracy:** Projected reduction in order-logging errors down to **under 1%,** eliminating financial losses from incorrect dispatches.
 * **Customer Retention (Estimated):** Response time reduced from hours (manual coordination) to seconds — tested execution times in this system averaged 1.3–5.5 seconds per query.
