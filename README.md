@@ -42,6 +42,8 @@
 | **Day 38** | Telegram E-Commerce Order Booking Bot Integration | ✅ |
 | **Day 39** | Robust E-Commerce Order Flow & Architecture Upgrade | ✅ |
 | **Day 40** | DesiBites Restaurant Order Bot (AI-Driven Automation) | ✅ |
+| **Day 41** | Lead Generation & Outreach AI Agent — Phase 1 (Search + Filter + Sheet) | ✅ |
+| **Day 42** | Lead Generation & Outreach AI Agent — Phase 2 (AI Draft + Gmail + Telegram) | ✅ |
 
 ---
 
@@ -238,6 +240,25 @@ This week, I transitioned into backend development using FastAPI. I learned the 
     * **Cosmetic Quantity-Parsing Fix:** Known cosmetic bug: confirmation text may misread portion labels like '(2 Pcs)' as quantity. Verified via Sheet row [ORD-1785397406151] — backend quantity/pricing unaffected. Fixed completely by simplifying structural text tags in the menu dataset.
 * **System Video Walkthrough:**
   > 🔗 **[🎥 Click Here to Watch the Full Demo Video](https://drive.google.com/file/d/15FMvdKWMEz8DHJEqdwlCN_A8R4ccqD-q/view?usp=sharing)**
+
+### 📝 Day 41: Lead Generation & Outreach AI Agent — Phase 1 (Search + Filter + Sheet)
+* **Concept:** Started the 3rd portfolio project — a dual-purpose system that doubles as a real client-outreach engine for Month 3 (targeting Faisalabad electronics businesses) and as a demonstrable portfolio piece.
+* **Architecture Decision:** Chose **SerpAPI (Google Maps search)** over Google Places API as the business-search source after evaluating setup cost and data quality for the MVP.
+* **Implementation:** Built the first pipeline segment — `HTTP Request (SerpAPI)` ➔ `Filter/Set` ➔ `Google Sheets (Append Row)`. Each business is classified with `Has_Website: Yes/No` and assigned a `Goal` (Automation outreach vs. Web + Automation outreach) based on that status.
+* **Bug Fix:** Resolved a `+92` phone-number formatting bug causing `#ERROR!` in Google Sheets by switching the relevant column's Cell Format from "User Entered" to "Raw."
+* **Verification:** Closed with screenshot-verified proof of real SerpAPI data flowing correctly into the Sheet with accurate Has_Website classification.
+
+### 📝 Day 42: Lead Generation & Outreach AI Agent — Phase 2 (AI Draft + Gmail + Telegram)
+* **Concept:** Extended the pipeline to research competitors, generate personalized outreach emails, and notify for review — without ever auto-sending (send/reply is explicitly out of scope by design; every email requires human review before it leaves Gmail as a draft).
+* **Architecture Decision:** Used **direct HTTP Request nodes to OpenRouter** (`meta-llama/llama-3.3-70b-instruct:free`) instead of n8n's AI Agent node, since each email is generated independently per business with no conversational memory required.
+* **Competitor Research (No Hallucination):** Implemented via a Code node that reuses the real SerpAPI search results already fetched in Phase 1 — filtering businesses with an active website and selecting a shuffled subset as "competitors." AI prompts are explicitly restricted to only reference the exact names provided, with hard instructions never to invent competitor names or statistics.
+* **Dual-Angle Drafting:** Two separate prompt branches (`IF Has Website`) generate genuinely different pitches — an "automation enhancement" angle for businesses that already have a website, and a "website + automation" angle for those that don't. Verified by comparing actual generated email text side-by-side, not just branch labels.
+* **Bug Fixes:**
+    * **Duplicate Gmail Drafts (68 → 5):** Root cause was uncontrolled repeated test runs. Fixed by adding a `Read Existing Leads` dedup step that checks `Business_Name` against the Sheet before processing, and by cleaning up stale test rows.
+    * **Identical Competitor Lists Across All Leads:** The original competitor-selection logic pulled a fixed top-3 slice from an unshuffled list, so most businesses received the exact same competitor names. Fixed by shuffling the eligible pool per-business before slicing, verified via a fresh run where all 5 leads showed genuinely different competitor sets.
+    * **Telegram "Message Too Long" Error:** Including full email bodies in a single combined Telegram message exceeded Telegram's 4096-character limit. Fixed by restructuring the summary-build step to emit one message per lead (plus a header and footer message) instead of one giant combined message.
+* **Known Limitation (Documented, Not Yet Fixed):** One business's real Google Maps listing title contains an embedded dash-separated phrase (`"Musa Electronics -Best Electronics in Faisalabad"`). In one generated email, the AI split this single business name into two separate competitor mentions, one of which doesn't correspond to a real business. This is a data-formatting edge case, not systemic hallucination — the AI is correctly restricted to given names elsewhere in the same run. **Mitigation for now: every draft must be manually reviewed before sending, which is already the workflow's design (no auto-send).** Flagged for a future cleanup pass on raw listing titles before scaling batch size.
+* **Verification:** Closed with screenshot-verified proof across Gmail Drafts, Google Sheet rows (12-column schema), and Telegram notifications — including full side-by-side email text for both the Has-Website and No-Website angles.
 
 ---
 
